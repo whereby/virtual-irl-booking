@@ -24,7 +24,7 @@ a small Vite dev-server middleware — the browser only ever talks to `/api/*`.
   for the [Whereby REST API](https://docs.whereby.com)).
 - Live transcription must be enabled for your account.
 - Additionally, verbatim transcription functionality must be enabled on your account. Talk to your CSM to get this enabled.
-- On /org/settings/api under your subdomain, make sure http://localhost:5500 is added under the "Allowed domains"
+- If any values are present in the "Allowed domains" section on `your-org.whereby.com/org/settings/api` (replace your-org with your subdomain), make sure http://localhost:5500 is added there as well.
 
 ## Setup
 
