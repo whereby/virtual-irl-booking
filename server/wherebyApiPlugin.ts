@@ -39,11 +39,11 @@ const ROOM_CONFIG: Record<
   { roomNamePrefix: string; roomPreferences: Record<string, boolean> }
 > = {
   virtual: {
-    roomNamePrefix: "andreas-vid-",
+    roomNamePrefix: "demo-vid-",
     roomPreferences: { transcription: true },
   },
   irl: {
-    roomNamePrefix: "andreas-irl-",
+    roomNamePrefix: "demo-irl-",
     roomPreferences: { verbatimTranscription: true },
   },
 };
@@ -81,7 +81,7 @@ function sendJson(res: ServerResponse, status: number, body: unknown): void {
   res.end(JSON.stringify(body));
 }
 
-// The slug mimics the Whereby room URL path, e.g. "andreas-irl-<uuid>".
+// The slug mimics the Whereby room URL path, e.g. "demo-irl-<uuid>".
 function deriveSlug(roomUrl: string): string {
   try {
     return new URL(roomUrl).pathname.replace(/^\/+/, "");

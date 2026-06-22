@@ -3,14 +3,14 @@
 A small demo that lets a clinician book 30-minute consultations and generate
 [Whereby](https://whereby.com) meeting links for two scenarios:
 
-- **Virtual** — Whereby's prebuilt video experience (room prefix `andreas-vid-`,
+- **Virtual** — Whereby's prebuilt video experience (room prefix `demo-vid-`,
   normal transcription).
 - **In real life (IRL)** — a single-device audio recorder with a record button,
-  for in-person consultations (room prefix `andreas-irl-`, verbatim
+  for in-person consultations (room prefix `demo-irl-`, verbatim
   transcription).
 
 Each booking creates a real Whereby room and gets a unique in-app URL that
-mirrors the room slug (e.g. `/andreas-irl-<uuid>`). Opening that URL renders the
+mirrors the room slug (e.g. `/demo-irl-<uuid>`). Opening that URL renders the
 right experience in-app. A list of booked meetings lets you open a meeting or
 copy the patient link.
 
