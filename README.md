@@ -21,8 +21,10 @@ a small Vite dev-server middleware — the browser only ever talks to `/api/*`.
 
 - [Node.js](https://nodejs.org) 18+ and npm.
 - A Whereby account with API access and a **Whereby API key** (a Bearer token
-  for the [Whereby REST API](https://docs.whereby.com)). Live transcription must
-  be enabled for your account/plan.
+  for the [Whereby REST API](https://docs.whereby.com)).
+- Live transcription must be enabled for your account.
+- Additionally, verbatim transcription functionality must be enabled on your account. Talk to your CSM to get this enabled.
+- On /org/settings/api under your subdomain, make sure http://localhost:5500 is added under the "Allowed domains"
 
 ## Setup
 
