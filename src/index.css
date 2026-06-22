@@ -1,0 +1,115 @@
+:root {
+  --text: #6f675a;
+  --text-h: #181410;
+  --bg: #fbf8f1;
+  --border: #e7e1d3;
+  --code-bg: #f3ecdb;
+  --accent: #2d6a54;
+  --accent-bg: rgba(45, 106, 84, 0.1);
+  --accent-border: rgba(45, 106, 84, 0.45);
+  --social-bg: rgba(243, 236, 219, 0.5);
+  --shadow:
+    rgba(24, 20, 16, 0.12) 0 10px 15px -3px, rgba(24, 20, 16, 0.06) 0 4px 6px -2px;
+
+  /* Status + recording palette (from brand colours) */
+  --ready: #2d6a54;
+  --pending: #c1843a;
+  --rec: #ba5b3d;
+  --rec-strong: #9f4a30;
+  --surface: #f3ecdb;
+  --vid: #3a6ea5;
+
+  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--sans);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @media (max-width: 1024px) {
+    font-size: 16px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #a49c8b;
+    --text-h: #f4efe6;
+    --bg: #15140f;
+    --border: #2f2b22;
+    --code-bg: #211e17;
+    --accent: #3f8a6e;
+    --accent-bg: rgba(63, 138, 110, 0.18);
+    --accent-border: rgba(63, 138, 110, 0.5);
+    --social-bg: rgba(47, 48, 58, 0.5);
+    --shadow:
+      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+
+    --ready: #54b089;
+    --pending: #d9a24e;
+    --rec: #cc6c49;
+    --rec-strong: #ba5b3d;
+    --surface: #211e17;
+    --vid: #6ea0d6;
+  }
+}
+
+#root {
+  width: 100%;
+  margin: 0 auto;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: 56px;
+  letter-spacing: -1.68px;
+  margin: 32px 0;
+  @media (max-width: 1024px) {
+    font-size: 36px;
+    margin: 20px 0;
+  }
+}
+h2 {
+  font-size: 24px;
+  line-height: 118%;
+  letter-spacing: -0.24px;
+  margin: 0 0 8px;
+  @media (max-width: 1024px) {
+    font-size: 20px;
+  }
+}
+p {
+  margin: 0;
+}
+
+code {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}

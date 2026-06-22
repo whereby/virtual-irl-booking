@@ -1,0 +1,467 @@
+.app {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Header ---- */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.app-title {
+  font-family: var(--heading);
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 0.2px;
+  color: var(--text-h);
+}
+
+/* ================= Booking page ================= */
+.booking {
+  flex: 1;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.card {
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.book-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 8px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.field input[type="datetime-local"] {
+  font: inherit;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+.kind-toggle {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.kind-toggle legend {
+  padding: 0;
+  margin-bottom: 4px;
+}
+
+.kind-option {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 12px;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.kind-option.is-on {
+  border-color: var(--accent-border);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+.kind-option input {
+  grid-row: 1 / 3;
+  accent-color: var(--accent);
+  width: 18px;
+  height: 18px;
+}
+
+.kind-title {
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.kind-desc {
+  grid-column: 2;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.primary {
+  font: inherit;
+  font-weight: 600;
+  align-self: flex-start;
+  padding: 11px 22px;
+  border-radius: 999px;
+  border: none;
+  color: #fff;
+  background: var(--accent);
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease, background 0.2s ease;
+}
+
+.primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.primary:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-error {
+  color: var(--rec-strong);
+  font-size: 14px;
+}
+
+.empty {
+  color: var(--text);
+  font-size: 15px;
+}
+
+/* ---- Meeting list ---- */
+.meeting-list {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.meeting-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.meeting-main {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.badge {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 999px;
+  color: #fff;
+}
+
+.badge-virtual {
+  background: var(--vid);
+}
+
+.badge-irl {
+  background: var(--rec);
+}
+
+.meeting-when {
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.meeting-slug {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text);
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.meeting-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.action {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--accent-border);
+  background: var(--accent-bg);
+  color: var(--accent);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.action:hover {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+/* ================= Recorder (IRL) ================= */
+.recorder {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  padding: 40px 24px;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 16px 7px 13px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--text);
+  flex: none;
+}
+
+.status-pill.is-ready .status-dot {
+  background: var(--ready);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--ready) 22%, transparent);
+}
+
+.status-pill.is-connecting .status-dot {
+  background: var(--pending);
+  animation: blink 1.1s ease-in-out infinite;
+}
+
+.status-pill.is-off .status-dot {
+  background: var(--text);
+  opacity: 0.6;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+.record-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.record-button {
+  position: relative;
+  isolation: isolate;
+  width: 168px;
+  height: 168px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  background: var(--accent);
+  display: grid;
+  place-items: center;
+  box-shadow: var(--shadow);
+  transition:
+    transform 0.15s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.record-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow:
+    var(--shadow),
+    0 0 0 6px var(--accent-bg);
+}
+
+.record-button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.record-button:disabled {
+  cursor: not-allowed;
+  background: var(--border);
+  color: color-mix(in srgb, var(--text) 70%, transparent);
+  box-shadow: none;
+}
+
+.record-button.is-recording {
+  background: var(--rec);
+}
+
+.record-button.is-recording:hover:not(:disabled) {
+  background: var(--rec-strong);
+  box-shadow:
+    var(--shadow),
+    0 0 0 6px color-mix(in srgb, var(--rec) 20%, transparent);
+}
+
+.record-button.is-recording::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--rec);
+  z-index: -1;
+  animation: pulse-ring 1.7s ease-out infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.55);
+    opacity: 0;
+  }
+}
+
+.mic-icon {
+  width: 60px;
+  height: 60px;
+}
+
+.stop-icon {
+  width: 46px;
+  height: 46px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.spinner {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 5px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.record-label {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.record-meta {
+  font-size: 15px;
+  color: var(--text);
+  min-height: 1.2em;
+}
+
+.record-timer {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  color: var(--rec);
+}
+
+.rec-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--rec);
+  animation: blink 1.1s ease-in-out infinite;
+}
+
+.record-meta.hint {
+  color: var(--pending);
+}
+
+.participant-note {
+  font-size: 14px;
+  color: var(--text);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  min-height: 1.2em;
+}
+
+.participant-note.is-on {
+  opacity: 1;
+}
+
+.participant-note.is-on::before {
+  content: "👥 ";
+}
+
+.error-banner {
+  max-width: 420px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--rec-strong);
+  background: color-mix(in srgb, var(--rec) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--rec) 35%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .record-button.is-recording::before,
+  .status-pill.is-connecting .status-dot,
+  .rec-dot,
+  .spinner {
+    animation: none;
+  }
+}
