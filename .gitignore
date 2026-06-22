@@ -17,6 +17,7 @@ dist-ssr
 meetings.json
 
 # Editor directories and files
+.claude
 .vscode/*
 !.vscode/extensions.json
 .idea
