@@ -29,21 +29,28 @@ export interface Meeting {
 }
 
 // Per-kind room creation config.
-//   virtual → Whereby prebuilt experience, normal transcription.
-//   irl     → our recording-button experience, verbatim transcription
-//             (verbatimTranscription confirmed working via the user's curl).
-// NOTE: the "normal transcription" key for virtual is the one unverified detail;
-// adjust here if the Whereby API rejects or ignores `transcription`.
+//   virtual → Whereby prebuilt experience. Locked so the host gets a knock /
+//             waiting room (the patient joins remotely). Normal live
+//             transcription is a built-in host control in the prebuilt UI, so
+//             no creation-time roomPreferences flag is needed.
+//   irl     → our recording-button experience, verbatim transcription. Unlocked
+//             — it's an in-person, single-device session, so no knock.
+//             (verbatimTranscription confirmed working via the user's curl.)
 const ROOM_CONFIG: Record<
   MeetingKind,
-  { roomNamePrefix: string; roomPreferences: Record<string, boolean> }
+  {
+    roomNamePrefix: string;
+    isLocked: boolean;
+    roomPreferences?: Record<string, boolean>;
+  }
 > = {
   virtual: {
     roomNamePrefix: "demo-vid-",
-    roomPreferences: { transcription: true },
+    isLocked: true,
   },
   irl: {
     roomNamePrefix: "demo-irl-",
+    isLocked: false,
     roomPreferences: { verbatimTranscription: true },
   },
 };
@@ -167,9 +174,11 @@ export function wherebyApiPlugin(): Plugin {
                 endDate: roomExpiry.toISOString(),
                 roomMode: "group",
                 roomNamePrefix: cfg.roomNamePrefix,
-                isLocked: false,
+                isLocked: cfg.isLocked,
                 fields: ["hostRoomUrl"],
-                roomPreferences: cfg.roomPreferences,
+                ...(cfg.roomPreferences
+                  ? { roomPreferences: cfg.roomPreferences }
+                  : {}),
               }),
             });
 
