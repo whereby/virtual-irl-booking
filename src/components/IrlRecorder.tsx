@@ -178,7 +178,13 @@ function Recorder({
 
   return (
     <main className="recorder">
-      <div className={`status-pill is-${connState}`}>
+      {/* The pill tracks connection state ("Ready to record" etc.), which is
+          meaningless once recording — hide it then, but keep its space. */}
+      <div
+        className={`status-pill is-${connState}${
+          isRecording ? " is-hidden" : ""
+        }`}
+      >
         <span className="status-dot" />
         {statusLabel}
       </div>
@@ -219,17 +225,22 @@ function Recorder({
             <span className="rec-dot" aria-hidden="true" /> Recording ·{" "}
             {formatElapsed(elapsedMs)}
           </p>
+        ) : isConnected && !isMicrophoneEnabled ? (
+          <p className="record-meta hint">{blockedReason}</p>
         ) : (
-          isConnected &&
-          !isMicrophoneEnabled && (
-            <p className="record-meta hint">{blockedReason}</p>
-          )
+          // Reserve the line so the button doesn't shift when the timer appears.
+          <p className="record-meta">&nbsp;</p>
         )}
       </div>
 
-      {isRecording && (
-        <div className="caption-strip" aria-live="polite">
-          {captionLines.length === 0 ? (
+      {/* Always rendered (hidden when idle) so the fixed-height box reserves its
+          space and the record button never moves when recording starts. */}
+      <div
+        className={`caption-strip${isRecording ? "" : " is-hidden"}`}
+        aria-live="polite"
+      >
+        {isRecording &&
+          (captionLines.length === 0 ? (
             <p className="caption-placeholder">Listening…</p>
           ) : (
             captionLines.map((line, i) => (
@@ -242,9 +253,8 @@ function Recorder({
                 {line.text}
               </p>
             ))
-          )}
-        </div>
-      )}
+          ))}
+      </div>
 
       <p className={`participant-note${hasOtherParticipant ? " is-on" : ""}`}>
         {hasOtherParticipant ? "Other participant connected" : " "}

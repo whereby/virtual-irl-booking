@@ -472,6 +472,13 @@
   opacity: 0.55;
 }
 
+/* Kept in the layout (space reserved) but not shown — avoids shifting the
+   record button when recording starts/stops. */
+.status-pill.is-hidden,
+.caption-strip.is-hidden {
+  visibility: hidden;
+}
+
 .participant-note {
   font-size: 14px;
   color: var(--text);
