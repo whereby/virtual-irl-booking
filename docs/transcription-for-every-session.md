@@ -1,11 +1,10 @@
-# One platform, every session: transcription for online *and* in-person consultations
+# One platform, every session: transcription for online _and_ in-person consultations
 
-*Audience: engineering leadership.*
 **TL;DR —** With a single Whereby room, a few SDK calls, and no extra infrastructure, you can capture and transcribe **in-person** sessions using the exact same real-time stack that powers your online meetings.
 
 ## The idea
 
-Most video platforms stop at the screen. But a lot of high-value conversations — a doctor and a patient, a therapist and a client, an advisor and a customer — happen in the *same room*. They still need a record: a transcript, a summary, a searchable history.
+Most video platforms stop at the screen. But a lot of high-value conversations — a doctor and a patient, a therapist and a client, an advisor and a customer — happen in the _same room_. They still need a record: a transcript, a summary, a searchable history.
 
 The insight behind this build: **a Whereby room doesn't have to be a "meeting."** It can be a session pipeline. Point a single device at a room, capture audio, turn on transcription. No second participant, no remote call — just the room's real-time and transcription infrastructure doing the work.
 
@@ -27,21 +26,26 @@ Both are backed by rooms created through the Whereby REST API. The only meaningf
 
 ## The IRL mechanic
 
-Three moves.
+**1. Create a room, set to use "verbatim transcription".** Server-side, so the API key never reaches the browser.
 
-**1. Create a room, flagged for verbatim transcription.** Server-side, so the API key never reaches the browser.
+```js
+// Node — the API key stays on the server, never in the browser.
+const res = await fetch("https://api.whereby.dev/v1/meetings", {
+  method: "POST",
+  headers: {
+    Authorization: `Bearer ${process.env.WHEREBY_API_KEY}`,
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    endDate: "2027-01-01T00:00:00Z",
+    roomMode: "group",
+    roomNamePrefix: "demo-irl-",
+    fields: ["hostRoomUrl"],
+    roomPreferences: { verbatimTranscription: true },
+  }),
+});
 
-```bash
-curl https://api.whereby.dev/v1/meetings \
-  -H "Authorization: Bearer $WHEREBY_API_KEY" \
-  -H "Content-Type: application/json" \
-  -d '{
-        "endDate": "2027-01-01T00:00:00Z",
-        "roomMode": "group",
-        "roomNamePrefix": "clinic-irl-",
-        "fields": ["hostRoomUrl"],
-        "roomPreferences": { "verbatimTranscription": true }
-      }'
+const { roomUrl, hostRoomUrl } = await res.json();
 ```
 
 The response returns a `roomUrl` and a `hostRoomUrl`. The latter carries a `roomKey` that grants **host** privileges — required to start transcription.
@@ -66,7 +70,7 @@ Because the room only ever has **one** participant, there's no second party to b
 ```tsx
 // on press
 actions.startLiveTranscription(); // the verbatim record
-actions.startLiveCaptions();       // a rolling, human-visible preview
+actions.startLiveCaptions(); // a rolling, human-visible preview
 
 // render the last few caption lines under the button
 state.liveCaptions?.captionLog.slice(-4).map((c) => c.text);
@@ -76,11 +80,7 @@ That's the whole trick. No bespoke audio pipeline, no third-party speech-to-text
 
 ## Why this matters
 
-For a platform business, this is leverage. You already operate the hard parts — real-time media, a transcription engine, a global edge. Exposing them through **two surfaces** — prebuilt UI for online, SDK for in-person — lets a single customer serve *their* customers across both worlds with one integration and one data model.
-
-Concretely, a healthcare or coaching customer can run remote sessions in the prebuilt UI **and** capture in-person sessions with the SDK recorder — and get transcripts for **all** of them, in the same format, from the same provider. The transcript becomes the unifying artifact: feed it into notes, summaries, search, or compliance, regardless of where the conversation physically happened.
-
-In-person conversations have been a blind spot for video platforms. They don't have to be.
+Concretely, Whereby customers can run remote sessions in Whereby's prebuilt UI **and** capture in-person sessions with the SDK recorder — and get transcripts for **all** of them, in the same format, from the same provider. The transcript becomes the unifying artifact: feed it into notes, summaries, search, or compliance, regardless of where the conversation physically happened.
 
 ## The shape of the integration
 
@@ -96,4 +96,4 @@ A few notes worth carrying into production:
 
 ## Bottom line
 
-With a room, a single participant, and a transcription flag, the same infrastructure that runs your online meetings turns real-world sessions into structured, searchable records — and gives your customers one provider for every conversation, on screen or in the room.
+With a room, a single participant, and a transcription flag, the same infrastructure that runs your online meetings turns real-world sessions into structured, searchable record, powered by one and the same provider for every conversation, on screen or in the room.
