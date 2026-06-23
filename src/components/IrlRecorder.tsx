@@ -91,9 +91,16 @@ function Recorder({
     connectionStatus,
     isMicrophoneEnabled,
     liveTranscription,
+    liveCaptions,
   } = state;
-  const { joinRoom, leaveRoom, startLiveTranscription, stopLiveTranscription } =
-    actions;
+  const {
+    joinRoom,
+    leaveRoom,
+    startLiveTranscription,
+    stopLiveTranscription,
+    startLiveCaptions,
+    stopLiveCaptions,
+  } = actions;
 
   const isConnected = connectionStatus === "connected";
   const transcriptionStatus = liveTranscription?.status;
@@ -151,6 +158,24 @@ function Recorder({
       ? "Starting…"
       : "Start recording";
 
+  // Recent caption lines (one per sentence/utterance), shown while recording so
+  // it's visible that audio is being transcribed in real time. Interim results
+  // that share a resultId are collapsed to their latest text, and we only keep
+  // captions from the current recording. The fixed-height box below shows the
+  // most recent few; older lines scroll up out of view.
+  const captionLines = (() => {
+    const log = liveCaptions?.captionLog ?? [];
+    if (log.length === 0) return [];
+    const since = liveCaptions?.startedAt ?? 0;
+    const byId = new Map<string, string>();
+    for (const c of log) {
+      if (c.timestamp < since) continue;
+      const text = c.text.trim();
+      if (text) byId.set(c.resultId, text);
+    }
+    return [...byId.entries()].slice(-8).map(([id, text]) => ({ id, text }));
+  })();
+
   return (
     <main className="recorder">
       <div className={`status-pill is-${connState}`}>
@@ -166,9 +191,17 @@ function Recorder({
           aria-pressed={isRecording}
           aria-label={buttonLabel}
           title={!isRecording && blockedReason ? blockedReason : undefined}
-          onClick={() =>
-            isRecording ? stopLiveTranscription() : startLiveTranscription()
-          }
+          onClick={() => {
+            if (isRecording) {
+              stopLiveTranscription();
+              stopLiveCaptions();
+            } else {
+              startLiveTranscription();
+              // Live captions run alongside the recording purely to show a
+              // rolling preview of what's being heard.
+              startLiveCaptions();
+            }
+          }}
         >
           {isPending ? (
             <span className="spinner" aria-hidden="true" />
@@ -193,6 +226,25 @@ function Recorder({
           )
         )}
       </div>
+
+      {isRecording && (
+        <div className="caption-strip" aria-live="polite">
+          {captionLines.length === 0 ? (
+            <p className="caption-placeholder">Listening…</p>
+          ) : (
+            captionLines.map((line, i) => (
+              <p
+                key={line.id}
+                className={`caption-line${
+                  i === captionLines.length - 1 ? " is-current" : ""
+                }`}
+              >
+                {line.text}
+              </p>
+            ))
+          )}
+        </div>
+      )}
 
       <p className={`participant-note${hasOtherParticipant ? " is-on" : ""}`}>
         {hasOtherParticipant ? "Other participant connected" : " "}

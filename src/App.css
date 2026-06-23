@@ -430,6 +430,48 @@
   color: var(--pending);
 }
 
+.caption-strip {
+  /* Fixed size so the box never resizes as captions stream in. New lines
+     appear at the bottom; older lines scroll up and fade out of view. */
+  width: 460px;
+  max-width: calc(100% - 16px);
+  height: 96px;
+  box-sizing: border-box;
+  margin: 0 8px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  text-align: left;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 3px;
+  /* Fade the top edge so lines scrolling out look like they recede. */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 26px);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 26px);
+}
+
+.caption-line {
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--text);
+  opacity: 0.6;
+}
+
+.caption-line.is-current {
+  color: var(--text-h);
+  opacity: 1;
+}
+
+.caption-placeholder {
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--text);
+  opacity: 0.55;
+}
+
 .participant-note {
   font-size: 14px;
   color: var(--text);
