@@ -4,9 +4,9 @@ A small demo that lets a clinician book 30-minute consultations and generate
 [Whereby](https://whereby.com) meeting links for two scenarios:
 
 - **Virtual** — Whereby's prebuilt video experience (room prefix `demo-vid-`,
-  normal transcription).
+  diarised transcription).
 - **In real life (IRL)** — a single-device audio recorder with a record button,
-  for in-person consultations (room prefix `demo-irl-`, verbatim
+  for in-person consultations (room prefix `demo-irl-`, non-diarised
   transcription).
 
 Each booking creates a real Whereby room and gets a unique in-app URL that
@@ -24,7 +24,7 @@ a small Vite dev-server middleware — the browser only ever talks to `/api/*`.
   for the [Whereby REST API](https://docs.whereby.com)).
 - Live transcription must be enabled for your account.
 - Additionally, verbatim transcription functionality must be enabled on your account. Talk to your CSM to get this enabled.
-- If any values are present in the "Allowed domains" section on `your-org.whereby.com/org/settings/api` (replace your-org with your subdomain), make sure http://localhost:5500 is added there as well.
+- If any values are present in the "Allowed domains" section on `your-org.whereby.com/org/settings/api` (replace `your-org` with your subdomain), make sure http://localhost:5500 is added there as well.
 
 ## Setup
 

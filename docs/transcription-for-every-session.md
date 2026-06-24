@@ -10,8 +10,8 @@ The insight behind this build: **a Whereby room doesn't have to be a "meeting."*
 
 That means one platform covers both modalities:
 
-- **Online** consultations → the prebuilt UI (`<whereby-embed>`): full video, live transcription.
-- **In real life (IRL)** consultations → the SDK: audio-only, one participant, verbatim transcription.
+- **Online** consultations → the prebuilt UI (`<whereby-embed>`): two video/audio streams, live diarised transcription.
+- **In real life (IRL)** consultations → the SDK: audio-only, two participants in the same location, live non-diarised transcription.
 
 Same rooms, same API, same transcription engine. Different front door.
 
