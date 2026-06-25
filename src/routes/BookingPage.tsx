@@ -107,7 +107,7 @@ function BookingPage() {
                 />
                 <span className="kind-title">In real life</span>
                 <span className="kind-desc">
-                  Recording button · verbatim transcription
+                  Transcribe button · verbatim transcription
                 </span>
               </label>
             </fieldset>
@@ -145,7 +145,7 @@ function BookingPage() {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      {m.kind === "irl" ? "Open recorder" : "Open (host)"}
+                      {m.kind === "irl" ? "Open transcriber" : "Open (host)"}
                     </a>
                     {/* IRL is in-person — one device records, so there is no
                         separate patient link to share. */}

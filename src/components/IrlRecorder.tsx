@@ -11,7 +11,7 @@ function IrlRecorder({ roomUrl }: { roomUrl: string }) {
   return (
     <div className="app">
       <header className="app-header">
-        <span className="app-title">Consultation Recorder</span>
+        <span className="app-title">Consultation Transcriber</span>
       </header>
       <MicGate roomUrl={roomUrl} />
     </div>
@@ -147,16 +147,16 @@ function Recorder({
 
   const statusLabel =
     connState === "ready"
-      ? "Ready to record"
+      ? "Ready to transcribe"
       : connState === "connecting"
         ? "Connecting…"
         : "Disconnected";
 
   const buttonLabel = isRecording
-    ? "Stop recording"
+    ? "Stop transcribing"
     : isPending
       ? "Starting…"
-      : "Start recording";
+      : "Start transcribing";
 
   // Recent caption lines (one per sentence/utterance), shown while recording so
   // it's visible that audio is being transcribed in real time. Interim results
@@ -178,8 +178,8 @@ function Recorder({
 
   return (
     <main className="recorder">
-      {/* The pill tracks connection state ("Ready to record" etc.), which is
-          meaningless once recording — hide it then, but keep its space. */}
+      {/* The pill tracks connection state ("Ready to transcribe" etc.), which
+          is meaningless once transcribing — hide it then, but keep its space. */}
       <div
         className={`status-pill is-${connState}${
           isRecording ? " is-hidden" : ""
@@ -222,7 +222,7 @@ function Recorder({
 
         {isRecording ? (
           <p className="record-meta record-timer">
-            <span className="rec-dot" aria-hidden="true" /> Recording ·{" "}
+            <span className="rec-dot" aria-hidden="true" /> Transcribing ·{" "}
             {formatElapsed(elapsedMs)}
           </p>
         ) : isConnected && !isMicrophoneEnabled ? (
@@ -262,7 +262,7 @@ function Recorder({
 
       {transcriptionStatus === "error" && (
         <p className="error-banner" role="alert">
-          Recording failed to start
+          Transcription failed to start
           {liveTranscription?.error ? `: ${liveTranscription.error}` : ""}.
           {liveTranscription?.error === "not_in_a_room"
             ? " The room wasn’t fully connected — wait for “Ready”, then try again."
