@@ -20,7 +20,7 @@ Same rooms, same API, same transcription engine. Different front door.
 A small React app where a clinician books a 30-minute consultation and picks the type:
 
 - **Virtual** → generates host + guest links into the Whereby prebuilt experience.
-- **IRL** → opens a single screen with one big record button — for the device sitting on the desk between clinician and patient.
+- **IRL** → opens a single screen with one big transcribe button — for the device sitting on the desk between clinician and patient.
 
 Both are backed by rooms created through the Whereby REST API. The only meaningful differences are which front-end you mount and which transcription preference you set at creation.
 
@@ -65,11 +65,11 @@ useEffect(() => {
 
 Because the room only ever has **one** participant, there's no second party to bill for and no video to ship — you're using the room purely as a real-time audio + transcription channel.
 
-**3. Record, and show it's working.** One button starts verbatim transcription (the record) and live captions (the on-screen proof that audio is flowing):
+**3. Transcribe, and show it's working.** One button starts verbatim transcription and live captions (the on-screen proof that audio is flowing):
 
 ```tsx
 // on press
-actions.startLiveTranscription(); // the verbatim record
+actions.startLiveTranscription(); // the verbatim transcription
 actions.startLiveCaptions(); // a rolling, human-visible preview
 
 // render the last few caption lines under the button
@@ -80,7 +80,7 @@ That's the whole trick. No bespoke audio pipeline, no third-party speech-to-text
 
 ## Why this matters
 
-Concretely, Whereby customers can run remote sessions in Whereby's prebuilt UI **and** capture in-person sessions with the SDK recorder — and get transcripts for **all** of them, in the same format, from the same provider. The transcript becomes the unifying artifact: feed it into notes, summaries, search, or compliance, regardless of where the conversation physically happened.
+Concretely, Whereby customers can run remote sessions in Whereby's prebuilt UI **and** capture in-person sessions with the SDK transcriber — and get transcripts for **all** of them, in the same format, from the same provider. The transcript becomes the unifying artifact: feed it into notes, summaries, search, or compliance, regardless of where the conversation physically happened.
 
 ## The shape of the integration
 
@@ -96,4 +96,4 @@ A few notes worth carrying into production:
 
 ## Bottom line
 
-With a room, a single participant, and a transcription flag, the same infrastructure that runs your online meetings turns real-world sessions into structured, searchable record, powered by one and the same provider for every conversation, on screen or in the room.
+With a room, a single participant, and a transcription flag, the same infrastructure that runs your online meetings turns real-world sessions into structured, searchable transcripts, powered by one and the same provider for every conversation, on screen or in the room.
